@@ -1,1 +1,78 @@
+/*
+
+2.16 - Arithmetic
+
+Write a program that asks the user to enter two numbers, obtains them from
+the user and prints their sum, product, difference, quotient and remainder.
+
+CHALLENGE: Using Structs 
+
+*/
+
+#include<stdio.h>
+#include<limits.h>
+
+struct CalculationResults
+{
+	double sum;
+	double product;
+	double difference;
+	double quotient;
+	int remainder;
+} CalculationResults;
+
+int main() {
+
+	double num1 = 0, num2 = 0;
+
+	struct CalculationResults results;
+
+	printf("Enter the first number: ");
+	// Loop until a valid number is entered for the first number
+	while (scanf_s("%lf", &num1) != 1)
+	{
+		getchar();  // Discard any leftover characters in input buffer
+		fprintf(stderr, "Error: Invalid input for first number.\n");
+		printf("Please try again: ");
+	}
+
+	printf("Enter the second number: ");
+	while (scanf_s("%lf", &num2) != 1)
+	{
+		getchar();  // Discard any leftover characters in input buffer
+		fprintf(stderr, "Error: Invalid input for second number.\n");
+		printf("Please try again: ");
+	}
+
+	results.sum = num1 + num2;
+	results.difference = num1 - num2;
+	results.product = num1 * num2;
+
+	if (num2 != 0)
+	{
+		results.quotient = num1 / num2;
+		results.remainder = (int)num1 % (int)num2; // Cast for integer remainder
+	}
+	else
+	{
+		fprintf(stderr, "\nWarning: Division by zero.\n");
+	}
+
+	puts("\nCalculation Results:");
+	printf("  Sum:        %.2lf\n", results.sum);
+	printf("  Product:     %.2lf\n", results.product);
+	printf("  Difference:  %.2lf\n", results.difference);
+
+	if (num2 == 0) //Testing devision by 0
+	{
+		printf_s("  Quotient:  %s\n", "undefined (attempted divison by 0)");
+		printf_s("  Remainder:  %s\n", "undefined (attempted divison by 0)");
+	}
+	else
+	{
+		printf("  Quotient:  %.2lf\n", results.quotient);
+		printf_s("  Remainder:  %d\n", results.remainder);
+	}
+
+}
 
